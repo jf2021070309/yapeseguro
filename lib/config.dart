@@ -1,0 +1,19 @@
+const String APP_VERSION     = '1.0.0';
+const String PACKAGE_YAPE   = 'pe.yape.app';
+const String PREFIJO_PERU   = '+51';
+
+// Regex para extraer monto del texto de la notificación
+const String REGEX_MONTO  = r'S[/\s]*([\d]+\.?\d*)';
+
+// Regex para extraer nombre del pagador
+// Ejemplo: "Juan Pérez te yapeo S/ 50.00"
+const String REGEX_NOMBRE = r'^(.+?)\s+te\s+(?:yapeo|envió|yapeó)';
+
+// Colección en Firestore
+const String FIRESTORE_COLECCION = 'pagos_yape';
+
+// Paquetes a monitorear (agregar Plin u otros aquí)
+const List<String> PAQUETES_MONITOREAR = [
+  'pe.yape.app',
+  // 'pe.bcp.plin',
+];
