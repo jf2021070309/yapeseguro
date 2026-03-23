@@ -49,6 +49,9 @@ class FirebaseService {
         total += double.tryParse(pago.monto.replaceAll(',', '')) ?? 0.0;
       }
 
+      // Ordenar de más reciente a más antiguo
+      pagos.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+
       return {
         'cantidad': pagos.length,
         'total': total,
@@ -62,5 +65,31 @@ class FirebaseService {
         'pagos': [],
       };
     }
+  }
+
+  // 4. Obtener todos los pagos (Historial)
+  Future<List<PagoYape>> obtenerHistorialTodos() async {
+    try {
+      QuerySnapshot snapshot = await _db
+          .collection(FIRESTORE_COLECCION)
+          .orderBy('timestamp', descending: true)
+          .get();
+
+      return snapshot.docs.map((doc) => PagoYape.fromFirestore(doc)).toList();
+    } catch (e) {
+      print("Error al obtener historial: $e");
+      return [];
+    }
+  }
+
+  // 5. Escuchar todos los pagos en tiempo real (Historial en Vivo)
+  Stream<List<PagoYape>> escucharHistorialTodos() {
+    return _db
+        .collection(FIRESTORE_COLECCION)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) {
+          return snapshot.docs.map((doc) => PagoYape.fromFirestore(doc)).toList();
+        });
   }
 }

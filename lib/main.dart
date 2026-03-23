@@ -26,9 +26,19 @@ import 'services/yape_service.dart';
 */
 
 @pragma('vm:entry-point')
-void notificationCallback(NotificationEvent event) {
+void notificationCallback(NotificationEvent event) async {
+  // Inicialización crítica para que Firebase y SharedPreferences no congelen la app en segundo plano
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp();
+    }
+  } catch (e) {
+    print("Error init Firebase background: $e");
+  }
+
   print("Notificación recibida en segundo plano: ${event.packageName}");
-  YapeService().procesarNotificacion(event);
+  await YapeService().procesarNotificacion(event);
 }
 
 Future<void> main() async {

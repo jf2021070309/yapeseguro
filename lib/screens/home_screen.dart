@@ -12,6 +12,7 @@ import '../services/firebase_service.dart';
 import '../widgets/ultimo_pago_card.dart';
 import '../widgets/configuracion_card.dart';
 import '../widgets/resumen_dia_sheet.dart';
+import 'historial_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -213,6 +214,25 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HistorialScreen()),
+                    );
+                  },
+                  icon: const Icon(Icons.history),
+                  label: const Text("HISTORIAL COMPLETO"),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    foregroundColor: const Color(0xFF6C3FC5),
+                    side: const BorderSide(color: Color(0xFF6C3FC5)),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
 
