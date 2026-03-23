@@ -16,4 +16,9 @@ const String FIRESTORE_COLECCION = 'pagos_yape';
 const List<String> PAQUETES_MONITOREAR = [
   'pe.yape.app',
   // 'pe.bcp.plin',
+  
+  // -- AÑADIDOS PARA PRUEBAS (Puedes borrarlos luego) --
+  'com.whatsapp', // WhatsApp normal
+  'com.whatsapp.w4b', // WhatsApp Business
+  'org.telegram.messenger', // Telegram
 ];

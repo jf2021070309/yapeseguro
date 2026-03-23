@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_notification_listener/flutter_notification_listener.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
@@ -39,12 +40,25 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Future<void> _initApp() async {
+    await _cargarConfiguracion();
+
     // 1. Notifications Listener Permission
     bool hasPermission = await NotificationsListener.hasPermission ?? false;
     if (!hasPermission) {
       _showPermissionDialog();
     } else {
       _startMonitoring();
+    }
+  }
+
+  Future<void> _cargarConfiguracion() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (mounted) {
+      setState(() {
+        _telControllers[0].text = prefs.getString('tel1') ?? '';
+        _telControllers[1].text = prefs.getString('tel2') ?? '';
+        _telControllers[2].text = prefs.getString('tel3') ?? '';
+      });
     }
   }
 
