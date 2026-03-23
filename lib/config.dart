@@ -1,5 +1,5 @@
-const String APP_VERSION     = '1.0.0';
-const String PACKAGE_YAPE   = 'pe.yape.app';
+const String APP_VERSION    = '1.0.0';
+const String PACKAGE_YAPE   = 'com.bcp.innovacxion.yapeapp';
 const String PREFIJO_PERU   = '+51';
 
 // Regex para extraer monto del texto de la notificación ((?i) lo hace insensible a mayúsculas/minúsculas)
@@ -14,7 +14,8 @@ const String FIRESTORE_COLECCION = 'pagos_yape';
 
 // Paquetes a monitorear (agregar Plin u otros aquí)
 const List<String> PAQUETES_MONITOREAR = [
-  'pe.yape.app',
+  'com.bcp.innovacxion.yapeapp', // ID Oficial de Yape
+  'pe.yape.app', // Alternativo/Obsoleto
   // 'pe.bcp.plin',
   
   // -- AÑADIDOS PARA PRUEBAS (Puedes borrarlos luego) --
